@@ -70,6 +70,6 @@
   },
   "exclude": [
     "types",
-    "dist"
+    "js"
   ]
 }
