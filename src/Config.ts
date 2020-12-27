@@ -47,4 +47,4 @@ export function loadPluginConfig(config: {
     }
 
     return {pluginConfig, foundConfigFile, $};
-};
+}

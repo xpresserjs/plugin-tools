@@ -1,4 +1,5 @@
 .vscodes
 .idea
 node_modules
+types
 js
