@@ -5,17 +5,17 @@ import type {DollarSign} from "xpresser/types";
  * @param config
  * @param $
  */
-export function loadPluginConfig(config: {
+export function loadPluginConfig<T=Record<any, any>>(config: {
     namespace: string,
     configFile: string,
     type: "function" | "object",
-    default: (...args: any[]) => Record<any, any>,
+    default: (...args: any[]) => T,
 }, $?: DollarSign) {
     const {getInstance, InXpresserError} = require("xpresser") as typeof import("xpresser");
     if (!$) $ = getInstance();
 
     // Convert pluginConfig to collection.
-    const pluginConfig = $.objectCollection(config.default($));
+    const pluginConfig = $.objectCollection<T & {namespace: string}>(config.default($) as any);
 
     // Add namespace to plugin pluginConfig (optional but recommended)
     pluginConfig.set("namespace", config.namespace);
