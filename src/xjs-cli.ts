@@ -4,15 +4,17 @@ import type {DollarSign} from "xpresser/types";
  * Add an extension to the projects addExtension method.
  * @param extension
  * @param $
+ * @param path
  */
-export function addExtension(extension: string, $?: DollarSign) {
+export function addExtension(extension: string, $?: DollarSign, path?: string) {
     if (!$) {
         $ = (require('xpresser') as typeof import('xpresser')).getInstance();
     }
 
-    const useXjsCliFile = $.path.base("use-xjs-cli.json");
+    const useXjsCliFile = path ? path : $.path.base("use-xjs-cli.json");
+
     if (!$.file.exists(useXjsCliFile)) {
-        return $.logErrorAndExit("use-xjs-cli.json not found.");
+        return $.logErrorAndExit(`${useXjsCliFile} not found.`);
     }
 
     const data = $.file.readJson(useXjsCliFile) as Record<string, any>;
