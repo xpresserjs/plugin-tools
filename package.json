@@ -1,6 +1,6 @@
 {
   "name": "@xpresser/plugin-tools",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Tools required to build xpresser plugins",
   "main": "index.js",
   "types": "index.d.ts",
