@@ -1,8 +1,6 @@
-import {loadPluginConfig} from "./src/Config"
-import {addExtension} from "./src/xjs-cli"
-import extendRequestEngine from "./src/ExtendRequestEngine"
+import * as ConfigHelpers from "./src/Config"
+import * as XjsCliHelpers from "./src/xjs-cli"
+import ExtendRequestEngine from "./src/ExtendRequestEngine"
 
-const ConfigHelpers = {loadPluginConfig}
-const XjsCliHelpers =  {addExtension};
 
-export {ConfigHelpers, XjsCliHelpers, extendRequestEngine}
+export {ConfigHelpers, XjsCliHelpers, ExtendRequestEngine}

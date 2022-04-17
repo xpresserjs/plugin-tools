@@ -1,17 +1,19 @@
 import type {DollarSign} from "xpresser/types";
 
+/**
+ * Load Plugin Config
+ * @param config
+ * @param $
+ */
 export function loadPluginConfig(config: {
     namespace: string,
     configFile: string,
     type: "function" | "object",
     default: (...args: any[]) => Record<any, any>,
-}) {
-    const {getInstance, InXpresserError}: {
-        getInstance: () => DollarSign,
-        InXpresserError: typeof Error
-    } = require("xpresser");
+}, $?: DollarSign) {
+    const {getInstance, InXpresserError} = require("xpresser") as typeof import("xpresser");
+    if (!$) $ = getInstance();
 
-    const $ = getInstance();
     // Convert pluginConfig to collection.
     const pluginConfig = $.objectCollection(config.default($));
 
@@ -19,7 +21,7 @@ export function loadPluginConfig(config: {
     pluginConfig.set("namespace", config.namespace);
 
     // Try to get config_file.(js|ts)
-    // File extension was excluded to allow require guess the file.
+    // File extension was excluded to allow requiring guess the file.
     // Just in-case it's typescript.
     const configPath = $.path.configs(config.configFile);
     let userDefinedConfig;

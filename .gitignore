@@ -2,4 +2,7 @@
 .idea
 node_modules
 types
-js
+
+
+*.js
+*.d.ts
