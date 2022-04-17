@@ -2,8 +2,8 @@
   "name": "@xpresser/plugin-tools",
   "version": "1.2.1",
   "description": "Tools required to build xpresser plugins",
-  "main": "js/index.js",
-  "types": "types/index.d.ts",
+  "main": "index.js",
+  "types": "index.d.ts",
   "author": "xpresserjs",
   "license": "MIT",
   "scripts": {
