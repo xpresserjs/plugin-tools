@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "npx tsc",
+    "prepublishOnly": "npm run build",
     "watch": "npx tsc --watch"
   },
   "private": false,
