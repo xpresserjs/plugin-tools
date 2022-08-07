@@ -5,17 +5,18 @@ import type {DollarSign} from "xpresser/types";
  * @param config
  * @param $
  */
-export function loadPluginConfig<T=Record<any, any>>(config: {
+export function loadPluginConfig<T = Record<any, any>>(config: {
     namespace: string,
     configFile: string,
     type: "function" | "object",
     default: (...args: any[]) => T,
 }, $?: DollarSign) {
+    // Get Xpresser Instance
     const {getInstance, InXpresserError} = require("xpresser") as typeof import("xpresser");
     if (!$) $ = getInstance();
 
     // Convert pluginConfig to collection.
-    const pluginConfig = $.objectCollection<T & {namespace: string}>(config.default($) as any);
+    const pluginConfig = $.objectCollection<T & { namespace: string }>(config.default($) as any);
 
     // Add namespace to plugin pluginConfig (optional but recommended)
     pluginConfig.set("namespace", config.namespace);
@@ -36,9 +37,15 @@ export function loadPluginConfig<T=Record<any, any>>(config: {
 
     // Throw Error if config file does not return a function.
     if (foundConfigFile && typeof userDefinedConfig !== "function") {
-        throw new InXpresserError(
-            `Plugin ${config.namespace}  Config file must return a function.`
-        );
+        // check if export default is defined
+        if (typeof userDefinedConfig === "object" && typeof userDefinedConfig.default === "function") {
+            userDefinedConfig = userDefinedConfig.default;
+        } else {
+            throw new InXpresserError(
+                `Plugin ${config.namespace}  Config file must export a function.`
+            );
+        }
+
     }
 
     if (foundConfigFile) {
